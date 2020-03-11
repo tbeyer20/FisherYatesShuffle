@@ -1,16 +1,27 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class FisherYatesShuffle {
 
 	public static void main(final String[] args) {
-		final int size = 10;
+		while(true){
+			try{
+				Scanner in = new Scanner(System.in);
+				System.out.println("How many numbers do you want to shuffle? ");
+				int size = in.nextInt();
+				in.close();
+				ArrayList<Integer> random_arr = getRandomArray(size);
+				System.out.println("\nInitial order of random array:   \n" + random_arr);
 
-		ArrayList<Integer> random_arr = getRandomArray(size);
-		System.out.println("Initial order of random array:   "  + random_arr);
-
-		System.out.println("Array after FisherYates Shuffle: " + Arrays.toString(fisherYatesShuffle(random_arr)));
+				System.out.println(
+						"\nArray after FisherYates Shuffle: \n" + Arrays.toString(fisherYatesShuffle(random_arr)));
+				break;
+			}catch(java.util.InputMismatchException e){
+				System.out.println("Invalid input. Try again...");
+			}
+		}
 	}
 
 	private static int[] fisherYatesShuffle(final ArrayList<Integer> random_arr) {
