@@ -11,6 +11,10 @@ public class FisherYatesShuffle {
 				Scanner in = new Scanner(System.in);
 				System.out.println("How many numbers do you want to shuffle? ");
 				int size = in.nextInt();
+				if(size > 100000){
+					System.out.println("Thats too high.  Pick a lower number...");
+					continue;
+				}
 				in.close();
 				ArrayList<Integer> random_arr = getRandomArray(size);
 				System.out.println("\nInitial order of random array:   \n" + random_arr);
