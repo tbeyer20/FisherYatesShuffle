@@ -1,45 +1,40 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class FisherYatesShuffle {
 
-	public static void main(String[] args) {
-		int size = 10;
-		int[] array = new int[size];
+	public static void main(final String[] args) {
+		final int size = 10;
 
-		array = shuffleIt(size);
-		fisherYatesShuffle(array);
+		ArrayList<Integer> random_arr = getRandomArray(size);
+		System.out.println("Initial order of random array:   "  + random_arr);
 
-		System.out.println(Arrays.toString(array));
+		System.out.println("Array after FisherYates Shuffle: " + Arrays.toString(fisherYatesShuffle(random_arr)));
 	}
 
-	public static int[] fisherYatesShuffle(int[] array) {
-		int[] cards = new int[array.length];
-		Random rand = new Random();
+	private static int[] fisherYatesShuffle(final ArrayList<Integer> random_arr) {
+		final int arr_length = random_arr.size();
+		final int[] shuffled_arr = new int[arr_length];
+		final Random rand = new Random();
 
-		for (int i = cards.length - 1; i > 0; i--) {
-			int n = rand.nextInt(i + 1);
-
-			// swap
-			int tmp = cards[n];
-			cards[n] = cards[i];
-			cards[i] = tmp;
+		for (int i = 0; i < arr_length; i++) {
+			final int rand_index = rand.nextInt(random_arr.size());
+			shuffled_arr[i] = random_arr.get(rand_index);
+			random_arr.remove(rand_index);
 		}
 
-		return cards;
+		return shuffled_arr;
 	}
 
-	public static int[] shuffleIt(int numberOfElements) {
-		int[] myArray = new int[numberOfElements];
-		Random rand = new Random();
+	private static ArrayList<Integer> getRandomArray(int numberOfElements) {
+		final ArrayList<Integer> rand_arr = new ArrayList<Integer>();
+		final Random rand = new Random();
 
-		while (numberOfElements > 0) {
-			int n = rand.nextInt(500) + 1;
-			myArray[numberOfElements-1] = n;
-			numberOfElements--;
+		while (numberOfElements-- > 0) {
+			rand_arr.add(rand.nextInt(500));
 		}
-
-		return myArray;
+		return rand_arr;
 	}
 
 }
